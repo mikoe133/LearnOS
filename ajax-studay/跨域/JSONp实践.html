@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            border: 1px yellow solid;
+        }
+    </style>
+</head>
+<body>
+    用户名: <input type="text" name="" id="username">
+    <p></p>
+    <script >
+        var input = document.querySelector('input')
+        var p = document.querySelector('p')
+        function handle(data){
+            input.style.border = 'solid 3px red'
+            p.innerHTML = data.msg
+        }
+        input.onblur = function (){
+            var username = this.value
+            const script = document.createElement('script')
+            script.src = 'http://127.0.0.1:8000/checkname?callback=handle'
+            // 插入script到body中的最后
+            document.body.appendChild(script)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //对于目标具有控制权,
+        class Star{
+            play(){console.log('演戏');}
+        }
+        class Starproxy{
+            constructor(name){
+                this.superstar = new Star();
+            }
+            talk(price){
+                if(price>10000){
+                    this.superstar.play();
+                }else{
+                    throw new Error('价格太低');
+                }
+            }
+        }
+        let jjr = new Starproxy('周杰伦');
+        jjr.talk(100000);
+        jjr.talk(1000);
+    </script>
+</body>
+</html>

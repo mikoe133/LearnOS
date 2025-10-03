@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+div {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+div div {
+    margin-bottom: 10px;
+}
+
+div div:last-child {
+    margin-bottom: 0;
+}
+
+.divClass {
+    transition: transform 0.3s ease;
+}
+
+.divClass:hover {
+    transform: scale(1.05);
+}
+
+.xxx {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.xxx:hover {
+    background-color: #0062cc;
+}
+.timeDiv:hover,
+.titleDiv:hover,
+.amountDiv:hover,
+.noteDiv:hover {
+    transform: scale(1.01);
+    transition: transform 0.6s ease;
+}
+
+    </style>
+</head>
+
+<body>
+    <h1>记账本列表</h1>
+    <div>
+        <% accounts.forEach(function(item) { %>
+            <div class="<%= item.type==='-1'?'warn':'ok' %>">
+                <div class="timeDiv">时间:<%= item.time %>
+                </div>
+                <div class="titleDiv">标题:<%= item.title %>
+                </div>
+                <div class="amountDiv"><span class="<%= item.type==='-1'?'zhichu':'shouru' %>">
+                        <%= item.type==='-1' ?'支出':'收入' %>
+                    </span>金额:<%= item.account %>
+                </div>
+                <div class="noteDiv">备注:<%= item.remarks %>
+                </div>
+                <a href="/account/<%= item.id %>"><div class="xxx">X</div></a>
+            </div>
+            <hr>
+            <% }); %>
+    </div>
+</body>
+
+</html>

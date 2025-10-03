@@ -1,0 +1,31 @@
+let arr = [];
+let dom = document.querySelectorAll('.sql-result-body tbody tr')
+Array.from(dom).forEach((item) => {
+    let domgid = item.querySelector('.el-table_3_column_10 div span');
+    let domnbrs = item.querySelector('.el-table_3_column_11 div span');
+    let domurl = item.querySelector('.el-table_3_column_12 div span');
+    let gidtext = domgid.innerText;
+    let nbrstext = domnbrs.innerText;
+    let urltext = domurl.innerText;
+    let matchReg = urltext.match(/http[s]?:\/\/[^,]*/g);
+    if (matchReg && matchReg.length >= 2) {
+        let matchArr = [gidtext,nbrstext,matchReg[0], matchReg[1]];
+        arr.push(matchArr);
+    }
+})
+function arrayToCSV(arr) {  
+    let csv = 'gid,nbrs,url1,url2\n'; // CSV header  
+    arr.forEach(item => {  
+        csv += `${item[0]},${item[1]},"${item[2]}","${item[3]}"\n`; // 注意对URL进行引号包裹，防止特殊字符问题  
+    });  
+    return csv;  
+}  
+let csvContent = arrayToCSV(arr);  
+let blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});  
+
+let link = document.createElement('a');  
+link.href = window.URL.createObjectURL(blob);  
+link.setAttribute('download', 'data.csv');  
+document.body.appendChild(link); 
+link.click();  
+document.body.removeChild(link); 

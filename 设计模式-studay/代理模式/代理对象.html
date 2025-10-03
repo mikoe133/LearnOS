@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 代理模式就是对源对象进行代理访问,来控制对对象的访问
+        let obj = {
+            name: '张三',
+            age: 18,
+            sex: '男',
+            workprice: 10000
+        }
+        let proxy = new Proxy(obj, {
+            get(target, key) {
+                if (key === 'workprice') {
+                    console.log('你访问了隐私属性')
+                    return '你无权访问'
+                } else {
+                    console.log(`你访问了${key}属性`)
+                    return target[key]
+                }
+            },
+            set(target, key, value) {
+                if (key === 'workprice') {
+                    console.log('你修改了隐私属性')
+                    return false
+                } else {
+                    console.log(`你设置了${key}属性，新的值为${value}`)
+                    target[key] = value
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

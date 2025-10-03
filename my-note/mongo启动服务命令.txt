@@ -1,0 +1,2 @@
+mongo启动:net start MongoDB
+关闭:net stop MongoDB

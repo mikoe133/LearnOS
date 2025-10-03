@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue (1).js"></script>
+    <style>
+        .basic{
+            border: 1px black solid;
+            width: 100px;
+            height: 100px;
+        }
+
+        .happy{
+            background-color: rgb(21, 244, 62);
+        }
+        .sad{
+            background-color: #452a2a;
+        }
+        .normal{
+            background-color: #7fa4e3;
+        }
+        .a1{
+            border-radius: 20px;
+        }
+        .a2{
+            box-shadow: 2px red;
+        }
+        .a3{
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="a">
+        <div class="basic" :class="mood" @click="changemood">{{name}}</div>
+        <br>
+        <div class="basic" :class="arr" @click="changemood">{{name}}</div>
+        <div class="basic" :class="obj" @click="changemood">{{name}}</div>
+        <div class="basic" :style="style">{{name}}</div>
+        <div v-if="n===1"></div>
+        <div v-else-if="n===1"></div>
+        <div v-else-if="n===2"></div>
+        <div v-else></div>
+        <template v-if="n===1">
+            <h1>1</h1>
+            <h1>1</h1>
+            <h1>1</h1>
+        </template>
+    </div>
+</body>
+    <script>
+        const vm = new Vue({
+            el:'#a',
+            data:{
+                name:'我',
+                mood:'happy',
+                arr:['a1','a2','a3'],
+                obj:{
+                    a1:false,
+                    a2:true,
+                    a3:true
+                },
+                style:{
+                    fontSize:'40px',
+                    backgroundColor:'orange'
+                }
+            },
+            methods:{
+                changemood(){
+                    const arr = ['happy','normal','sad']
+                    const index = Math.floor(Math.random()*3)
+                    this.mood=arr[index]
+                }
+            }
+        })
+    </script>
+</html>

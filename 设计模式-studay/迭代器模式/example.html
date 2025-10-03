@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    //为陌生的对象添加迭代器,使其在被访问时可以使用迭代器的forof方法得到数组
+    <script>
+        var obj = {
+            code: 200,
+            name: 'xxxx',
+            list: ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff'],
+            [Symbol.iterator]: function () {
+                var index = 0;
+                return {
+                    next: function () {
+                        if (index < this.list.length) {
+                            return {
+                                value: this.list[index++],
+                                done: false
+                            }
+                        } else {
+                            return {
+                                done: true,
+                                value:undefined
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        var it = obj[Symbol.iterator]();
+        console.log(it.next());
+        console.log(it.next());
+        console.log(it.next());
+        console.log(it.next());
+        for (let item of obj) {
+            console.log(item);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            display: flex;
+            height: 500px;
+        }
+
+        .box .left {
+            width: 200px;
+            background-color: #ccc;
+        }
+
+        .box .right {
+            flex: 1;
+            background-color: #43121277;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        路径
+    </header>
+    <div class="box">
+        <!-- 组件1 -->
+        <div class="left">
+            <ul>
+                <li>首页</li>
+                <li>用户管理</li>
+                <li>权限管理</li>
+                <li>新闻管理</li>
+            </ul>
+        </div>
+        <!-- 组件2 -->
+        <div class="right">
+            <div class="bread"></div>
+        </div>
+    </div>
+    <script>
+        class Target {
+            constructor() {
+                this.watchers = []
+            }
+            add(watcher) {
+                this.watchers.push(watcher)
+            }
+            ifchange(data) {
+                this.watchers.forEach(item => item.update(data))
+            }
+            remove(watcher) {
+                this.watchers.forEach((item, index) => {
+                    if (item === watcher) {
+                        this.watchers.splice(index, 1)
+                    }
+                })
+            }
+        }
+        class Watcher {
+            constructor(name) {
+                this.name = name
+                this.ele = document.querySelector(this.name)
+            }
+            update(data) {
+                this.ele.innerHTML = data
+            }
+        }
+        const target = new Target()
+        const watcher1 = new Watcher('.bread')
+        const watcher2 = new Watcher('.header')
+        target.add(watcher1)
+        target.add(watcher2)
+        let oli = document.querySelectorAll('.left li')
+        Array.from(oli).forEach((item,index) => {
+          item.onclick = function() {
+              console.log(index);
+              target.ifchange(item.innerHTML)
+          }
+        })
+    </script>
+</body>
+
+</html>

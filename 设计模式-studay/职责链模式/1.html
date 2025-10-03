@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="input">
+    <button id="btn">注册</button>
+    <script>
+        //正常写法
+        // btn.onclick = function () {
+        //     let val = input.value;
+        //     if (val.length < 6) {
+        //         console.log('用户名长度不能小于6位');
+        //     } else {
+        //         if(Number.isNaN(+val)){
+        //             console.log('用户名必须为数字');
+        //         }else{
+        //             console.log('注册成功');
+        //         }
+        //     }
+        // }
+
+        //职责链模式
+
+        btn.onclick = function () {
+            let val = input.value;
+            checks.check(val);
+        }
+        function checkLength(val) {
+            if (val.length < 6) {
+                console.log('用户名长度不能小于6位');
+                return
+            } return 'next'
+        }
+        function checkNumber(val) {
+            if (Number.isNaN(+val)) {
+                console.log('用户名必须为数字');
+                return;
+            } return 'next'
+        }
+        function checkEmpty(val) {
+            if (val.length === 0) {
+                console.log('用户名不能为空');
+                return
+            } return 'next'
+        }
+        class Chain {
+            constructor(fn) {
+                this.checkrule = fn;
+                this.nextrule = null;
+            }
+            addRule(next) {
+                this.nextrule = new Chain(next)
+                return this.nextrule
+            }
+            end() {
+                this.nextrule = {
+                    check: () => {
+                        console.log('注册成功');
+                    }
+                }
+            }
+            check(val) {
+                this.checkrule(val) === 'next' ? this.nextrule.check(val) : null
+            }
+        }
+        const checks = new Chain(checkEmpty)
+        checks.addRule(checkLength).addRule(checkNumber)
+            .end()
+    </script>
+</body>
+
+</html>

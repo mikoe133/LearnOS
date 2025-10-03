@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Target{
+            constructor() {
+                this.watchers=[]
+            }
+            add(watcher){
+                this.watchers.push(watcher)
+            }
+            ifchange(){
+                this.watchers.forEach(item=>item.update())
+            }
+            remove(watcher){
+                this.watchers.forEach((item,index)=>{
+                    if(item===watcher){
+                        this.watchers.splice(index,1)
+                    }
+                })
+            }
+        }
+        class Watcher{
+            constructor(name) {
+                this.name=name
+            }
+            update(){
+                console.log(this.name,'改动了代码')
+            }
+        }
+        const target=new Target()
+        const watcher=new Watcher('1')
+        const watcher2=new Watcher('2')
+        target.add(watcher)
+        target.add(watcher2)
+        setTimeout(()=>{target.remove(watcher)},1000)
+        setTimeout(()=>{
+            target.ifchange()
+        },2000)
+    </script>
+</body>
+</html>

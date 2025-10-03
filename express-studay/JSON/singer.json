@@ -1,0 +1,32 @@
+{
+    "singers":[
+        {
+            "singer_name":"周杰伦",
+            "singer_pic":"http://baidu.com",
+            "other_name":"jay chou",
+            "singer_id":4588,
+            "id":1
+        },
+        {
+            "singer_name":"林俊杰",
+            "singer_pic":"http://baidu.com",
+            "other_name":"jay chou",
+            "singer_id":12388,
+            "id":2
+        },
+        {
+            "singer_name":"邓紫棋",
+            "singer_pic":"http://baidu.com",
+            "other_name":"jay chou",
+            "singer_id":213123,
+            "id":3
+        },
+        {
+            "singer_name":"蔡依林",
+            "singer_pic":"http://baidu.com",
+            "other_name":"jay chou",
+            "singer_id":838,
+            "id":4
+        }
+    ]
+}

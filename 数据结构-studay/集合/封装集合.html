@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class NewSet {
+            constructor() {
+                this.items = {};
+            }
+            add(value) {
+                if (!this.has(value)) {
+                    this.items[value] = value
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            delete(value) {
+                if (this.has(value)) {
+                    delete this.items[value];
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            has(value) {
+                return value in this.items;
+            }
+            clear() {
+                this.items = {};
+            }
+            size() {
+                return Object.keys(this.items).length;
+            }
+            values() {
+                return Object.values(this.items);
+            }
+        }
+        let nset = new NewSet();
+        var arr = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+        arr.forEach(item => {
+            nset.add(item);
+            nset.add(item);
+        })
+    </script>
+</body>
+
+</html>

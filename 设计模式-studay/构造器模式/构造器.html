@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .header {
+            display: flex;
+            width: 500px;
+        }
+
+        .header li {
+            flex: 1;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+
+        .box {
+            position: relative;
+            height: 200px;
+        }
+
+        .box li {
+            position: absolute;
+            width: 500px;
+            height: 200px;
+            background-color: pink;
+            display: none;
+        }
+
+        .header .active {
+            background-color: #4fd05e;
+        }
+
+        .box .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container1">
+        <ul class="header">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+        <ul class="box">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+    <div class="container2">
+        <ul class="header">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+        <ul class="box">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+    <script>
+        // class Tab{
+        //     constructor(dom){
+        //         this.dom = document.querySelector(dom)
+        //         this.headerItems = this.dom.querySelectorAll('.header li')
+        //         this.boxItems = this.dom.querySelectorAll('.box li')
+        //         this.init()
+        //     }
+        //     init(){
+        //         this.headerItems.forEach((item,index) => {
+        //             item.onclick=()=>{
+        //                 this.boxItems.forEach(item => {
+        //                   item.classList.remove('active') 
+        //                 })
+        //                 this.boxItems[index].classList.add('active')
+        //                 this.headerItems.forEach(item => {
+        //                   item.classList.remove('active')  
+        //                 })
+        //                 item.classList.add('active')
+        //             }
+        //         });
+        //     }
+        // }
+        // const newTab = new Tab('.container1');
+        // const newTab2 = new Tab('.container2');
+        // 构造重复的功能模块
+        class Tab {
+            constructor(dom) {
+                this.dom = document.querySelector(dom);
+                this.headerItems = this.dom.querySelectorAll('.header li');
+                this.boxItems = this.dom.querySelectorAll('.box li');
+                this.init();
+            }
+
+            init() {
+                this.headerItems.forEach((item, index) => {
+                    item.onclick = () => {
+                        this.resetItems();
+                        this.boxItems[index].classList.add('active');
+                        item.classList.add('active');
+                    };
+                });
+            }
+
+            resetItems() {
+                this.boxItems.forEach(item => item.classList.remove('active'));
+                this.headerItems.forEach(item => item.classList.remove('active'));
+            }
+        }
+
+        const newTab = new Tab('.container1');
+        const newTab2 = new Tab('.container2');
+
+    </script>
+</body>
+
+</html>

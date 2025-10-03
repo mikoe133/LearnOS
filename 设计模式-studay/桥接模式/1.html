@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Aodi1(engine){
+            this.engine=engine;
+        }
+        function Aodi2(engine){
+            this.engine=engine;
+        }
+        Aodi1.prototype.platform=function(){
+            console.log('我是Aodi1');
+        }
+        Aodi2.prototype.platform=function(){
+            console.log('我是Aodi2');
+        }
+        Aodi1.prototype.loadEngine=function(){
+            this.engine.run()
+        }
+        Aodi2.prototype.loadEngine=function(){
+            this.engine.run()
+        }
+        function V6(){
+            this.run=function(){
+                console.log('我是V6');
+            }
+        }
+        function V8(){
+            this.run=function(){
+                console.log('我是V8');
+            }
+        }
+        function V12(){
+            this.run=function(){
+                console.log('我是V12');
+            }
+        }
+        var aodi1=new Aodi1(new V6());
+        var aodi2=new Aodi2(new V8());
+        var aodi3=new Aodi1(new V12());
+        aodi1.loadEngine();
+        aodi1.platform()
+        aodi2.loadEngine();
+        aodi2.platform()
+        aodi3.loadEngine();
+        aodi3.platform()
+    </script>
+</body>
+</html>

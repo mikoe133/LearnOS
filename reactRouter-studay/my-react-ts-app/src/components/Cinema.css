@@ -1,0 +1,287 @@
+/* Cinema 组件样式 */
+.cinema-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* 头部样式 */
+.cinema-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.cinema-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cinema-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* 内容区域 */
+.cinema-content {
+  display: grid;
+  gap: 30px;
+}
+
+/* 影院列表 */
+.cinema-list h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cinema-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* 影院卡片 */
+.cinema-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+}
+
+.cinema-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.cinema-card.selected {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+  border: 3px solid #667eea;
+}
+
+/* 影院图片 */
+.cinema-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cinema-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cinema-card:hover .cinema-image img {
+  transform: scale(1.05);
+}
+
+.rating {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  backdrop-filter: blur(10px);
+}
+
+/* 影院信息 */
+.cinema-info {
+  padding: 20px;
+}
+
+.cinema-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+}
+
+.location {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.facilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.facility-tag {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* 电影排片表 */
+.movie-schedule {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.movie-schedule h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #333;
+  text-align: center;
+}
+
+.movies-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* 电影排片卡片 */
+.movie-schedule-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #667eea;
+}
+
+.movie-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.duration {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.show-times h4 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.time-slot {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.time-slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(45deg, #5a6fd8, #6b42a0);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.empty-state p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .cinema-container {
+    padding: 15px;
+  }
+  
+  .cinema-header {
+    padding: 30px 15px;
+  }
+  
+  .cinema-header h1 {
+    font-size: 2rem;
+  }
+  
+  .cinema-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .movie-schedule {
+    padding: 20px;
+  }
+  
+  .movie-schedule-card {
+    padding: 20px;
+  }
+  
+  .time-slots {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cinema-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .cinema-info {
+    padding: 15px;
+  }
+  
+  .facility-tag {
+    font-size: 0.8rem;
+    padding: 3px 10px;
+  }
+}

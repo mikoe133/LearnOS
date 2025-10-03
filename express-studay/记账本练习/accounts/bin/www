@@ -1,0 +1,71 @@
+// 引入app模块
+var app = require('../app');
+// 引入debug模块
+var debug = require('debug')('accounts:server');
+// 引入http模块
+var http = require('http');
+// 获取环境变量中的端口号，如果没有则默认为3000
+var port = normalizePort(process.env.PORT || '3000');
+// 设置端口号
+app.set('port', port);
+// 创建一个http服务器
+var server = http.createServer(app);
+// 拦截所有请求
+app.all((req, res, next) => {
+  // 允许哪些客户端访问
+  res.header('Access-Control-Allow-Origin', '*');
+// 设置响应头，允许跨域
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  // 允许哪些请求方法
+  res.header('Access-Control-Allow-Methods', 'get,post');
+  res.header('X-Powered-By','3.2.1')
+  next();
+})  
+server.listen(port);
+// 监听端口，当发生错误时调用onError函数
+server.on('error', onError);
+// 监听端口，当端口监听成功时调用onListening函数
+server.on('listening', onListening);
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

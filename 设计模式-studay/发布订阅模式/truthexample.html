@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            display: flex;
+            height: 500px;
+        }
+
+        .box .left {
+            width: 200px;
+            background-color: #ccc;
+        }
+
+        .box .right {
+            flex: 1;
+            background-color: #43121277;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        路径
+    </header>
+    <div class="box">
+        <!-- 组件1 -->
+        <div class="left">
+            <ul>
+                <li>首页</li>
+                <li>用户管理</li>
+                <li>权限管理</li>
+                <li>新闻管理</li>
+            </ul>
+        </div>
+        <!-- 组件2 -->
+        <div class="right">
+            <div class="bread"></div>
+        </div>
+    </div>
+    <script>
+       const Pubsub ={//订阅中心
+            message:{
+                // "A":[],A事件中存在多个订阅者
+                // "B":[],
+                // "C":[]
+            },
+            publish(type,data){
+                if(!this.message[type]){
+                    return 
+                }
+                this.message[type].forEach(item => {
+                    item(data)
+                });
+            },
+            subscribe(type,cb){
+                if(!this.message[type]){
+                    this.message[type ]= [cb]
+                }else{
+                    this.message[type].push(cb)
+                }
+            },
+            unsubscribe(type,cb){
+                if(!this.message[type]){
+                    return 
+                }
+                if(!cb){
+                    this.message[type]&&(this.message[type].length = 0)
+                }else{
+                    this.message[type] = this.message[type].filter(item => item !== cb)
+                }
+            }
+        }
+        Pubsub.subscribe('updatebread',function (data){
+            console.log('我是订阅者',data);
+            document.querySelector('.bread').innerText = data
+        })
+        let oli = document.querySelectorAll('.left li')
+        Array.from(oli).forEach(item => {
+            item.addEventListener('click',function (){
+                Pubsub.publish('updatebread',item.innerText)
+            })
+        })
+    </script>
+</body>
+
+</html>

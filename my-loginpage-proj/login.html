@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="css/Mystyle.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<!-- 背景图 -->
+		<video id="bg-video" src="./img/海底.mp4" autoplay loop muted></video>
+		<!-- <img src="./img/Rain drops on window_2.mp4" alt=""> -->
+		<!-- 毛玻璃 -->
+		<div class="blur">
+			<div class="bg">
+				
+			</div>
+			<!-- 表单开始-->
+			<div class="form">
+				<!-- <div class="form1">
+					<img src="img/biglogo.png" class="LOGO"/>
+					<p>
+						<h3>Welcome</h3><br />
+						Here you will grow. Let's embark on a pleasant journey together!
+					</p>
+				</div> -->
+				
+				<div class="form2">
+					<form action="" method="post">
+						<h3 style="font-size: 2.5rem;color: #e3ffff;" >Sign in</h3>
+						<input class="input-info info1" type="text" id="username" style="font-size: 2.25rem;" placeholder="User:" /><!-- <ion-icon name="person-outline"></ion-icon> --><br />
+						<input class="input-info info2" type="password" id="password" style="font-size: 2.25rem;"  placeholder="Password:"/><br />
+						<a class="a2" href="" style="font-size: 2.25rem;" >短信验证码登录</a><br />
+						<input style="font-size: 2.25rem;"  class="button1" type="button" value="登录" id="login-btn"/><br />
+						<a class="a1" href=""style="font-size: 2.25rem;" >注册</a>
+						<a class="a1" href=""style="font-size: 2.25rem;" >忘记密码</a>
+						<a class="a1" href=""style="font-size: 2.25rem;" >遇到问题</a><br /><br />
+						<a class="a1" href=""><ion-icon style="font-size: 2.25rem;"  name="logo-github" style="color: black;"></ion-icon></a>&nbsp;
+						<a class="a1" href=""><ion-icon style="font-size: 2.25rem;"  name="logo-wechat" style="color: limegreen;"></ion-icon></a>&nbsp;
+						<a class="a1" href=""><ion-icon style="font-size: 2.25rem;"  name="logo-tux" style="color: rgb(76, 162, 229)"></ion-icon></a>
+					</form>
+				</div>
+			</div>
+			<!-- 表单结束-->
+		</div>
+		<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+		<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+		<script type="text/javascript" src="./js/axios.min.js"></script>
+		<script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="./js/vue.min.js"></script>
+		<script type="text/javascript">
+			 $(function(){
+        $("#login-btn").click(function(){
+            let name=$("#username").val();
+            let pwd=$("#password").val();
+            axios.post('/login', { username: name, password: pwd })
+              .then(function (response) {
+                if(response.data.code==2){
+                    location.href="index.html";
+                }else{
+                    alert("用户名或密码错误!请重新登录");
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+        })
+    })
+		</script>
+	</body>
+</html>

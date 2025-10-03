@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class stack{
+            #item=[];
+            push(data){
+                this.#item.push(data);
+            }
+            pop(){
+                return this.#item.pop();
+            }
+            peek(){
+                return this.#item[this.#item.length-1];
+            }
+            isEmpty(){
+                return this.#item.length==0;
+            }
+            size(){
+                return this.#item.length;
+            }
+            clear(){
+                this.#item=[];
+            }
+            tostring(){
+                return this.#item.toString();
+            }
+        }
+        let s = new stack();
+    </script>
+</body>
+</html>

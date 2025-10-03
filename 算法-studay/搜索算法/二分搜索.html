@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function binarySearch(find,arr,start,end){
+            start = start||0
+            end = end||arr.length
+            var mid = Math.floor((start+end)/2)
+            arr = quickSort(arr)
+            if(start<=end&&find>=arr[start]&&find<=arr[end]){
+                if(arr[start]==find){
+                    return start
+
+                }
+                if(arr[end]==find){
+                    return end
+                }
+                if(arr[mid]==find){
+                    return mid
+                }
+                if(arr[mid]>find){
+                    return binarySearch(find,arr,start,mid-1)
+                }
+                if(arr[mid]<find){
+                    return binarySearch(find,arr,mid+1,end)
+                } 
+            }
+            return -1
+        }
+        function quickSort(array){
+            const length = array.length
+            if(length ==1){
+                return array
+            }
+            let base = array[0]
+            let minarr = arr.slice(1).filter(item=>item<=base)
+            let maxarr = arr.slice(1).filter(item=>item>base)
+            return quickSort(minarr).concat(base).concat(quickSort(maxarr))
+        }
+        binarySearch(5,[5,4,7,8])
+    </script>
+</body>
+</html>

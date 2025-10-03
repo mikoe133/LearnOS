@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个建造者类,负责对嘞中的方法和返回结果进行加载
+        class nav{
+            init(){console.log('nav-init');}
+            getData(){console.log('nav-getdata');}
+            render(){console.log('nav-render');}
+        }
+        class list{
+            init(){console.log('list-init');}
+            getData(){
+                return new Promise((resolve,reject)=>{
+                    setTimeout(()=>{
+                        resolve('list-data')
+                    },2000)
+                })
+            }
+            render(){console.log('list-render');}
+        }
+        class left{
+            init(){console.log('left-init');}
+            getData(){
+                return new Promise((resolve,reject)=>{
+                    setTimeout(()=>{
+                        resolve('left-data')
+                    },1000)
+                })
+            }
+            render(){console.log('left-render');}
+        }
+        class Creator{
+            async startbuild(builder){
+                await builder.init()
+                let res1 = await builder.getData()
+                console.log(res1);
+                let res2 = await builder.render()
+            }
+        }
+        let a = new Creator()
+        // a.startbuild(new nav())
+        a.startbuild(new list())
+        // a.startbuild(new left())
+    </script>
+</body>
+</html>

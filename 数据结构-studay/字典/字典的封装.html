@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Dictionaries {
+            constructor() {
+                this.table = {}
+            }
+            toStrkey(key) {
+                if (key === null) {
+                    return "null"
+                } else if (key === undefined) {
+                    return "undefined"
+                } else if (typeof key === 'string' || key instanceof String) {
+                    return key
+                }
+                return JSON.stringify(key)
+            }
+            hasKey(key) {
+                return this.table[this.toStrkey(key)] != null
+            }
+            set(key, value) {
+                if (key !== null && value !== null) {
+                    const tablekey = this.toStrkey(key)
+                    this.table[tablekey] = new valuepair(key, value)
+                    return true
+                }
+                return false
+            }
+            get(key) {
+                let valuepair = this.table[this.toStrkey(key)]
+                return valuepair === null ? undefined : valuepair.value
+            }
+            remove(key) {
+                if (this.hasKey(key)) {
+                    delete this.table[this.toStrkey(key)]
+                    return true
+                }
+                return false
+            }
+            keys() {
+                return Object.keys(this.table)
+            }
+            values() {
+                return this.keys().map(key => this.get(key))
+            }
+            keysValues() {
+                return Object.values(this.table)
+            }
+            size() {
+                return this.keys().length
+            }
+            isEmpty() {
+                return this.size() === 0
+            }   
+            clear() {
+                this.table = {}
+            }
+            forEach(cb){
+                const values =this.keysValues()
+                for(let i=0;i<values.length;i++){
+                    cb(values[i].key,values[i].value)
+                }
+            }
+        }
+        class valuepair {
+            constructor(key, value) {
+                this.key = key
+                this.value = value
+            }
+
+        }
+        var mymap = new Dictionaries()
+    </script>
+</body>
+
+</html>

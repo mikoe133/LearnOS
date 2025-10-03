@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 单链表适合不消耗性能的删除或插入元素,但是对于搜索元素并不擅长
+        class Node {
+            constructor(element) {
+                this.element = element
+                this.next = null
+            }
+        }
+        class LinkedList {
+            constructor() {
+                this.count = 0//节点数
+                this.head = null//链表头
+            }
+            push(element) {
+                const node = new Node(element)
+                if (this.head == null) {
+                    this.head = node
+                } else {
+                    let current = this.head //指针
+                    while (current.next !== null) {
+                        current = current.next
+                    }
+                    current.next = node
+                }
+                this.count++
+            }
+            removeAt(index) {
+                let pervious//前一个节点
+                let current = this.head//当前节点
+                if (index < 0 || index > this.count) return null
+                if (index === 0) {
+                    this.head = this.head.next
+                } else {
+                    for (let i = 0; i < index; i++) {
+                        pervious = current//将前一个节点循环到要删除节点的前一项,将它的next指向要删除节点的next
+                        current = current.next
+                    }
+                    pervious.next = current.next
+                }
+                this.count--
+                return current.element
+            }
+            getNodeAt(index) {
+                let current = this.head//当前节点
+                if (index < 0 || index > this.count) return null
+                for (let i = 0; i < index; i++) {
+                    current = current.next
+                }
+                return current
+            }
+            removeAt2(index) {
+                let pervious//前一个节点
+                let current = this.head//当前节点
+                if (index < 0 || index > this.count) return null
+                if (index === 0) {
+                    this.head = this.head.next
+                } else {
+                    pervious = index === 0 ? this.head : this.getNodeAt(index - 1)
+                    current = this.getNodeAt(index)
+                    pervious.next = current.next
+                }
+                this.count--
+                return current.element
+            }
+            equalFn(a, b) {
+                return a === b
+                // return JSON.stringify(a) === JSON.stringify(b)//对象形式
+
+            }
+            dataToindex(element) {
+                let current = this.head//当前节点
+                for (let i = o; i < this.count; i++) {
+                    if (this.equalFn(element, current.element)) {
+                        return i
+                    }
+                    current = current.next
+                }
+            }
+            remove(element) {
+                const index = this.dataToindex(element)
+                return this.removeAt(index)
+            }
+            insert(element, index) {
+                if (index >= 0 && index <= this.count) {
+                    const node = new Node(element)
+                    if (index === 0) {
+                        const current = this.head
+                        node.next = current
+                        this.head = node
+                    } else {
+                        const previous = this.getNodeAt(index - 1)
+                        const current = previous.next
+                        node.next = current
+                        previous.next = node
+                    }
+                    this.count++
+                    return true
+                }
+                return '插入不符合要求'
+            }
+            isEmpty() {
+                return this.size() === 0
+            }
+            size() {
+                return this.count
+            }
+            getHead() {
+                return this.head
+            }
+        }
+        const list = new LinkedList()
+        function game(list, time) {
+            let q = new LinkedList()
+            list.forEach(item => q.push(item))
+            while (q.size() > 1) {
+                for (let i = 0; i < time; i++) {
+                    q.push(q.removeAt2(0))
+                }
+                console.log(q.removeAt(0), '淘汰了');
+            }
+            return q.removeAt2(0)
+        }
+        console.log(game(['xyy', 'lsy', 'asd', 'wsd', 'efs'], 7));
+    </script>
+</body>
+
+</html>

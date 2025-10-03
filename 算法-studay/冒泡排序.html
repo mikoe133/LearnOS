@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function bubbleSort(array){
+            const length = array.length
+            for(let i = 0; i < length; i++){
+                for(let j = 0; j < length - 1-i; j++){
+                    if(array[j]>array[j+1]){
+                        swap(array,j,j+1)
+                    }
+                }
+            }
+            console.log(array);
+        }
+        function swap(arr,a,b){
+            const temp = arr[a]
+            arr[a] = arr[b]
+            arr[b] = temp
+        }
+    </script>
+</body>
+</html>

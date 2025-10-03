@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const p = new Promise((resolve,reject)=>{ //执行器函数
+        setTimeout(()=>{
+            const time = Date.now()
+            if(time%2 == 0){//成功
+                resolve('成功的数据'+time)
+            }else{//失败
+                reject('失败的数据'+time)
+            }
+        },3000)
+    })
+    p.then(
+        value=>{//接受得到成功的value数据
+            console.log('成功的回调',value);
+        },
+        reason=>{
+            console.log('失败的回调',reason);
+        }
+    )
+
+    const p1 = new Promise((resolve,reject)=>{ //执行器函数
+        setTimeout(()=>{
+            const time = Date.now()
+            if(time%2 == 0){//成功
+                resolve('成功的数据'+time)
+            }else{//失败
+                reject('失败的数据'+time)
+            }
+        },3000)
+    })
+    p1.then(
+        value=>{
+            console.log('onResolved()1',value);
+        }
+    ).catch(
+        reason=>{
+            console.log('onRejected()1',reason);
+        }
+    )
+</script>
+</html>

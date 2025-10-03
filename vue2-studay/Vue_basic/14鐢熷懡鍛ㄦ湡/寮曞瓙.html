@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script src="../js/vue (1).js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">欢迎学习vue</h2>
+        <button @click="opacity=1">透明度设置为1</button>
+        <button @click="stopall">点我彻底停止</button>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止vue启动时生成生产提示
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            opacity: 1
+        },
+        methods: {
+            stopall() {
+                this.$destroy()
+            }
+        },
+        //Vue完成模版的解析并把初始的真实DOM元素放入页面后(挂载完毕)调用mounted
+        mounted() {
+            this.timer = setInterval(() => {
+                this.opacity -= 0.01
+                if (vm.opacity <= 0) {
+                    vm.opacity = 1
+                }
+            }, 16)
+        },
+        boforeDestroy() {
+            clearInterval(this.timer)
+        },
+    })
+</script>
+
+</html>

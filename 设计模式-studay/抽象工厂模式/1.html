@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 创建一个抽象的工厂,不直接创建实例对象,而是创建一个类
+        class User {
+            constructor(name, role, pages) {
+                this.name = name;
+                this.role = role;
+                this.pages = pages;
+                this.welcome();
+            }
+
+            welcome() {
+                console.log('欢迎用户:', this.name);
+            }
+
+            showdata() {
+                throw new Error('请在子类中实现抽象方法');
+            }
+
+            static createUser(role, username) {
+                switch (role) {
+                    case 'userAdmin':
+                        return new UserAdmin(username);
+                    case 'userSuperadmin':
+                        return new UserSuperadmin(username);
+                    case 'userGuest':
+                        return new UserGuest(username);
+                    default:
+                        throw new Error('参数错误');
+                }
+            }
+        }
+
+        class UserAdmin extends User {
+            constructor(username) {
+                super(username, 'admin', ['1', '2', '3']);
+            }
+
+            showdata() {
+                // 实现UserAdmin的showdata方法
+            }
+        }
+
+        class UserSuperadmin extends User {
+            constructor(username) {
+                super(username, 'superadmin', ['1', '2', '3', '4']);
+            }
+
+            showdata() {
+                // 实现UserSuperadmin的showdata方法
+            }
+        }
+
+        class UserGuest extends User {
+            constructor(username) {
+                super(username, 'guest', ['1']);
+            }
+
+            showdata() {
+                // 实现UserGuest的showdata方法
+            }
+        }
+
+        let u1 = User.createUser('userAdmin', '薛屹阳');
+
+    </script>
+</body>
+
+</html>

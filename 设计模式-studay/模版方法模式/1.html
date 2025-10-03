@@ -1,0 +1,35 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            var modal = function (params={}) {
+                var a = function () { }
+                a.prototype.init = function () {
+                    console.log('init')
+                   var list = this.start()
+                    this.end(list);
+                }
+                a.prototype.start = params.start || function () {
+                    throw ('必须实现start方法')
+                }
+                a.prototype.end = function (list){
+                    console.log(list,'数据已渲染')
+                }
+                return a;
+            }
+            var myclass = modal({
+                start() { console.log('获取数据');return 123},
+                end() {console.log('渲染页面'); }
+            })
+            new myclass().init()
+        </script>
+    </body>
+
+    </html>

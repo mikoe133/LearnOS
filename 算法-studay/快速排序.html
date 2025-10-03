@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function quickSort(array){
+            const length = array.length
+            if(length ==1){
+                return array
+            }
+            let base = array[0]
+            let minarr = arr.slice(1).filter(item=>item<=base)
+            let maxarr = arr.slice(1).filter(item=>item>base)
+            return quickSort(minarr).concat(base).concat(quickSort(maxarr))
+        }
+        quickSort()
+    </script>
+</body>
+</html>

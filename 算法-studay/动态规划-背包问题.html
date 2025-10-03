@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function knapSack(weight,values,w){
+            var n = weight.length-1
+            var f = [[]]
+            for(var j= 0;j<=w;j++){
+                if(j<weight[0]){
+                    f[0][j] = 0
+                }else{
+                    f[0][j] = values[0]
+                }
+            }
+            for(var j = 0;j<=w;j++){
+                for(var i = 1;i<=n;i++){
+                    if(!f[i]){
+                        f[i] = []
+                    }
+                    if(j<weight[i]){
+                        f[i][j]= f[i-1][j]
+                    }else{
+                        f[i][j] = Math.max(f[i-1][j],f[i-1][j-weight[i]]+values[i])
+                    }
+                }
+            }
+            return f[n][w]
+        }
+        knapSack([2,2,6,5,4],[60,100,120,100,40],10)
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .modal {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #c53dc3;
+        }
+    </style>
+</head>
+<body>
+    <button class="open">open</button>
+    <button class="close">close</button>
+    <script>
+        // 保证一个类仅有一个实例,每次提供一个全局访问点去new,避免全局使用的类频繁创建销毁,占用内存
+        // document.querySelector('.open').onclick = function() {
+        //     Singletonbtn.show();
+        // }
+        // document.querySelector('.close').onclick = function() {
+        //     Singletonbtn.hide();
+        // }
+        // class Singletonbtn {
+        //     static divModal = null;
+
+        //     static getInstance() {
+        //         if (!Singletonbtn.divModal) {
+        //             Singletonbtn.divModal = document.createElement('div');
+        //             Singletonbtn.divModal.className = 'modal';
+        //             Singletonbtn.divModal.innerHTML = 'hello world';
+        //             Singletonbtn.divModal.style.display = 'none';
+        //             document.body.appendChild(Singletonbtn.divModal);
+        //         }
+        //         return Singletonbtn.divModal;
+        //     }
+
+        //     static show() {
+        //         Singletonbtn.getInstance().style.display = 'block';
+        //     }
+
+        //     static hide() {
+        //         Singletonbtn.getInstance().style.display = 'none';
+        //     }
+        // }
+        class Singletonbtn {
+            constructor() {
+                if (!Singletonbtn.instance) {
+                    this.divModal = document.createElement('div');
+                    this.divModal.className = 'modal';
+                    this.divModal.innerHTML = 'hello world';
+                    this.divModal.style.display = 'none';
+                    document.body.appendChild(this.divModal);
+                    Singletonbtn.instance = this;
+                }
+                return Singletonbtn.instance;
+            }
+
+            show() {
+                this.divModal.style.display = 'block';
+            }
+
+            hide() {
+                this.divModal.style.display = 'none';
+            }
+        }
+
+        document.querySelector('.open').onclick = function() {
+            new Singletonbtn().show();
+        }
+
+        document.querySelector('.close').onclick = function() {
+            new Singletonbtn().hide();
+        }
+
+        // class Singletonbtn {
+        //     static instance = null;
+        //     divModal = null;
+
+        //     constructor() {
+        //         if (!Singletonbtn.instance) {
+        //             this.divModal = document.createElement('div');
+        //             this.divModal.className = 'modal';
+        //             this.divModal.innerHTML = 'hello world';
+        //             this.divModal.style.display = 'none';
+        //             document.body.appendChild(this.divModal);
+        //             Singletonbtn.instance = this;
+        //         }
+        //         return Singletonbtn.instance;
+        //     }
+
+        //     show() {
+        //         this.divModal.style.display = 'block';
+        //     }
+
+        //     hide() {
+        //         this.divModal.style.display = 'none';
+        //     }
+        // }
+
+        // document.querySelector('.open').onclick = function() {
+        //     const btnInstance = new Singletonbtn();
+        //     btnInstance.show();
+        // }
+
+        // document.querySelector('.close').onclick = function() {
+        //     const btnInstance = new Singletonbtn();
+        //     btnInstance.hide();
+        // }
+    </script>
+</body>
+</html>

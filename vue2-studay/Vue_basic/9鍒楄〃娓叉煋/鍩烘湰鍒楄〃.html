@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue (1).js"></script>
+</head>
+<body>
+    <div class="root">
+        <ul>
+            <li v-for="(item,index) in persons" :key="item.id">
+               {{index}}: {{item.name}}-{{item.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:'.root',
+        data:{
+            persons:[
+                {id:'001',name:'张飒',age:12},
+                {id:'002',name:'流水',age:14},
+                {id:'003',name:'大数据',age:132}
+            ]
+        }
+    })
+</script>
+</html>

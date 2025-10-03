@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个宏命令类,命令list中加入所有需要执行的命令
+        // 宏命令类中有一个execute方法,遍历list,执行每个命令的execute方法
+        class Command{
+            constructor(){
+                this.list=[]
+            }
+            add(command){
+                this.list.push(command)
+            }
+            execute(){
+                this.list.forEach(command=>{
+                    command.execute()
+                })
+            }
+        }
+        const Tabs = {
+            execute(){
+                console.log('选项卡执行')
+            }
+        }
+        const swipe = {
+            execute(){
+                console.log('轮播执行')
+            }
+        }
+        const command = new Command()
+        command.add(Tabs)
+        command.add(swipe)
+        command.execute()
+    </script>
+</body>
+</html>

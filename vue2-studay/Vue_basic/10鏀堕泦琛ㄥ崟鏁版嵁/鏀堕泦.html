@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue (1).js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit.prevent="demo" action="">
+            <label for="acc">账号: </label>
+            <input type="text" v-model.trim="userinfo.account" id="acc"><br><br>
+            <!-- .trim 去掉前后空格 -->
+            <label for="pwd">密码: </label>
+            <input type="password" v-model="userinfo.password" id="pwd"><br><br>
+            <label for="age">年龄: </label>
+            <input type="number" v-model.number="userinfo.age" id="age"><br><br>
+            <!-- .number将存的数字保存为number格式 -->
+            性别:
+            男 <input type="radio" value="male" v-model="userinfo.sex" name="sex">
+            女 <input type="radio" value="female" v-model="userinfo.sex" name="sex"><br><br>
+            爱好:
+            学习 <input type="checkbox" v-model="userinfo.hobby" value="study">
+            吃饭 <input type="checkbox" v-model="userinfo.hobby" value="eat">
+            游戏 <input type="checkbox" v-model="userinfo.hobby" value="game">
+            <br><br>
+            <select name="" id="" v-model="userinfo.city">
+                <option value="">请选择校区</option>
+                <option value="xian">西安</option>
+                <option value="wuhan">武汉</option>
+                <option value="anhui">安徽</option>
+            </select>
+            <br><br>
+            其他信息:
+            <textarea v-model.lazy="userinfo.other" name="" id="" cols="30" rows="10"></textarea>
+            <!-- .lazy失去焦点再保存数据 -->
+            <br><br>
+            <input v-model="userinfo.agree" type="checkbox" name="" id="">阅读并接受 <a href="#">《用户协议》</a>
+            <br><br>
+            <button>提交</button>
+        </form>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            userinfo: {
+                account: '',
+                password: '',
+                age:'',
+                sex: 'male',
+                hobby: [],
+                city: '',
+                other: '',
+                agree: '',
+            }
+        },
+        methods: {
+            demo() {
+                // console.log(this.account);
+                // console.log(this.password);
+                // console.log(this.sex);
+                // console.log(this.hobby);
+                // console.log(this.city);
+                // console.log(this.other);
+                // console.log(this.agree);
+                console.log(JSON.stringify(this.userinfo));
+            }
+        }
+    })
+</script>
+
+</html>

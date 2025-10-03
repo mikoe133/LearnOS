@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .reditem{
+            background-color: red;
+        }
+        .blueitem{
+            background-color: blue;
+        }
+        .greenitem{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <ul class="ullist">
+
+    </ul>
+    <script>
+        // 策略模式是对于每一个Switch情况的整合,将所有策略写在一起方便扩展可能的条件
+        
+        let list = [
+            {title: '第一项', description: '这是第一项'},
+            {title: '第二项', description: '这是第二项'},
+            {title: '第三项', description: '这是第三项'},
+            {title: '第四项', description: '这是第四项'},
+            {title: '第五项', description: '这是第五项'}
+        ]
+        let switchObj ={
+            '第一项':{
+                classname:"reditem",
+                description:"这是第一项"
+            },
+            '第二项':{
+                classname:"blueitem",
+                description:"这是第二项"
+            },
+            '第三项':{
+                classname:"greenitem",
+                description:"这是第三项"
+            },
+            '第四项':{
+                classname:"reditem",
+                description:"这是第四项"
+            },
+            '第五项':{
+                classname:"blueitem",
+                description:"这是第五项"
+            }
+        }
+        let Oullist = document.querySelector('.ullist')
+        Oullist.innerHTML = list.map(item => {
+            return `
+            <li>
+            <div>${item.title}</div>
+            <div class="${switchObj[item.title].classname}">${switchObj[item.title].description}</div>
+        </li>
+            `  
+        }).join('')
+    </script>
+</body>
+</html>

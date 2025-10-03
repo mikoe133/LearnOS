@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+
+    </ul>
+    <script>
+        var Iterator = function(arr,callback){
+            arr.forEach(function(item,index){
+                callback(item,index);
+            })
+        }
+        Iterator([1,2,3,4],function(item,index){
+            console.log(item,index);
+            var oli = document.createElement('li');
+            oli.innerHTML = item;
+            document.querySelector('ul').appendChild(oli);
+        })
+    </script>
+</body> 
+</html>

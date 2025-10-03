@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 转换进制
+        class Stack { 
+            #item = [];
+            push(data) {
+                this.#item.push(data);
+            }
+            pop() {
+                return this.#item.pop();
+            }
+            peek() {
+                return this.#item[this.#item.length - 1];
+            }
+            isEmpty() {
+                return this.#item.length == 0;
+            }
+            size() {
+                return this.#item.length;
+            }
+            clear() {
+                this.#item = [];
+            }
+        }
+        function convert(tennum,jz) {
+            let stack = new Stack();
+            let number = tennum
+            let string = ""
+            let basestring = "0123456789ABCDEF"
+            while (number > 0) {
+                stack.push(number % jz)
+                number = Math.floor(number / jz)
+            }
+            while (stack.isEmpty()===false) {
+                string += basestring[stack.pop()]
+            }
+            return string
+        }
+        console.log(convert(1000,16));
+    </script>
+</body>
+
+</html>

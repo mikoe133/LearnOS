@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        tanxin([2, 2, 6, 5, 4], [60, 100, 120, 100, 40], 10)
+        function tanxin(capacity, weight, values) {
+            var list = []
+            for (var i = 0; i < weight.length; i++) {
+                list.push({
+                    num: i + 1,
+                    w: weight[i],
+                    v: values[i],
+                    rate: values[i] / weight[i]
+                })
+            }
+            list.sort(function (a, b) {
+                return b.rate - a.rate
+            })
+
+            var selects = []
+            var total = 0
+            for (let i = 0; i < list.length; i++) {
+                var item = list[i]
+                if (item['w'] <= capacity) {
+                    selects.push({
+                        num: item.num,
+                        w: item.w,
+                        v: item.v,
+                        rate: 1
+                    })
+                    total += item.v
+                    capacity -= item.w
+                } else if (capacity > 0) {
+                    var rate = capacity / item['w']
+                    var v = item['v'] * rate
+                    selects.push({
+                        num: item.num,
+                        w: item.w * rate,
+                        v: item.v * rate,
+                        rate: rate
+                    })
+                    total += v
+                    break
+                } else {
+                    break
+                }
+            }
+            console.log(selects,total);
+        }
+    </script>
+</body>
+
+</html>

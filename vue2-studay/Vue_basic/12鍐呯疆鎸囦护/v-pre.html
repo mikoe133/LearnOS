@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script src="../js/vue (1).js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1 v-pre>{{n}}</h1>
+        <h2 v-once>初始化n是:{{n}}</h2>
+        <h2>{{n}}</h2>
+        <button @click="n++">n+1</button>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false //阻止vue启动时生成生产提示
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            n:1
+        },
+    })
+</script>
+</html>

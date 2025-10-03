@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            width: 100px;
+            height: 100px;
+            border: solid 1px #cae;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点击发送</button>
+    <div id="result"></div>
+</body>
+<script>
+    const btn = document.getElementsByTagName('button')[0]
+    const result = document.getElementById('result')
+    const xhr = new XMLHttpRequest()
+    let issending = false //是否正在发送请求
+    btn.onclick = function () {
+        if(issending){
+            xhr.abort()//取消请求
+        }
+        issending = true
+        //初始化 设置请求方法和url
+        xhr.open('get', 'http://127.0.0.1:8000/delay')
+        //发送
+        xhr.send()
+
+        // // 事件绑定 处理服务端返回的结果
+        xhr.onreadystatechange= function (){
+            // readystate 是xhr对象中的属性,表示状态0,1,2,3,4
+            // 服务端返回了所有的结果
+            if(xhr.readyState===4){
+                issending = false
+                // 判断响应状态码 200 404 403
+                if(xhr.status>=200&&xhr.status<300){
+                    // 处理结果 行 头 空行 体
+                    console.log(xhr.status);//状态码
+                    console.log(xhr.statusText);//状态字符串
+                    console.log(xhr.getAllResponseHeaders());//所有响应头
+                    console.log(xhr.response);//响应体
+                    result.innerHTML = xhr.response
+                }
+            }
+        }
+    }
+</script>
+
+</html>

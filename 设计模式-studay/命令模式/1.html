@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Recever {
+            constructor() {
+
+            }
+            execute(){
+                console.log('接受者执行请求');
+            }
+        }
+        class Command {
+            constructor(receiver) {
+                this.receiver = receiver;
+            }
+            execute(){
+                console.log('命令对象=>接受者处理');
+                this.receiver.execute();
+            }
+        }
+        class Invoker {
+            constructor(command) {
+                this.command = command;
+            }
+            order(){
+                console.log('发布请求');
+                this.command.execute();
+            }
+        }
+        const order = new Command(new Recever())
+        const client = new Invoker(order)
+        client.order();
+    </script>
+</body>
+
+</html>

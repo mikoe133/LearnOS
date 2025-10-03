@@ -1,0 +1,22 @@
+//1导入http模块
+const http = require('http')
+//2创建服务列表
+const server = http.createServer((request,response)=>{
+    //request获取请求行请求头请求体
+    //response对响应报文封装
+    //设置响应状态码
+    response.statusCode = 200
+    //响应状态描述
+    response.statusMessage = 'loveyou'
+    //设置响应头
+    //response.setHeader('content-type','text/html;charset=utf-8')//设置响应头的字符集解决乱码
+    //自定义响应头
+    response.setHeader('myheader','aaa')
+    //设置响应体
+    response.write('love')
+    response.end('薛屹阳')//设施响应体并结束响应
+})
+//3监视端口,启动服务
+server.listen(9000,()=>{
+    console.log('服务已经启用');
+})

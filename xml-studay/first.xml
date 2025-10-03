@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:upload="www.baidu.com" xmlns:download="www.biadu.com">
+    <upload:file>
+        <upload-url:url xmlns:upload-url="www.w3.org.upload-url">
+            aaa
+        </upload-url:url>
+    </upload:file>
+    <download:file>
+
+    </download:file>
+</root>

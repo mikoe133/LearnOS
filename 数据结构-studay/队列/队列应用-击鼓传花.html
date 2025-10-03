@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Queue {
+            #item = {};
+            #firstindex = 0;
+            #count = 0
+            enter(data) {
+                this.#item[this.#count] = data
+                this.#count += 1
+            }
+            del() {
+                if (this.#firstindex == this.#count) {
+                    return "队列为空"
+                }
+                let res = this.#item[this.#firstindex]
+                delete this.#item[this.#firstindex]
+                this.#firstindex += 1
+                return res
+            }
+            front() {
+                return this.#item[this.#firstindex]
+            }
+            isEmpty() {
+                return this.size() === 0
+            }
+            size() {
+                return this.#count - this.#firstindex
+            }
+            clear() {
+                this.#item = {}
+                this.#firstindex = 0
+                this.#count = 0
+            }
+            tostring() {
+                let str = ""
+                for (let i = this.#firstindex; i < this.#count; i++) {
+                    str += this.#item[i] + " "
+                }
+                return str
+            }
+        }
+        function game(list, time) {
+            let q = new Queue()
+            list.forEach(item => q.enter(item))
+            while (q.size() > 1) {
+                for (let i = 0; i < time; i++) {
+                    q.enter(q.del())
+                }
+                console.log(q.del(), '淘汰了');
+            }
+            return q.del()
+        }
+        console.log(game(['xyy', 'lsy', 'asd', 'wsd', 'efs'], 7));
+    </script>
+</body>
+
+</html>

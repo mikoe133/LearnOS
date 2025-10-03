@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 单链表适合不消耗性能的删除或插入元素,但是对于搜索元素并不擅长
+        class Node {
+            constructor(element) {
+                this.element = element
+                this.next = null
+            }
+        }
+        class LinkedList {
+            constructor() {
+                this.count = 0//节点数
+                this.head = null//链表头
+            }
+            push(element) {
+                const node = new Node(element)
+                if (this.head == null) {
+                    this.head = node
+                } else {
+                    let current = this.head //指针
+                    while (current.next !== null) {
+                        current = current.next
+                    }
+                    current.next = node
+                }
+                this.count++
+            }
+            removeAt(index) {
+                let pervious//前一个节点
+                let current = this.head//当前节点
+                if (index < 0 || index > this.count) return null
+                if (index === 0) {
+                    this.head = this.head.next
+                } else {
+                    for (let i = 0; i < index; i++) {
+                        pervious = current//将前一个节点循环到要删除节点的前一项,将它的next指向要删除节点的next
+                        current = current.next
+                    }
+                    pervious.next = current.next
+                }
+                this.count--
+                return current.element
+            }
+            getNodeAt(index) {
+                let current = this.head//当前节点
+                if (index < 0 || index > this.count) return null
+                for (let i = 0; i < index; i++) {
+                    current = current.next
+                }
+                return current
+            }
+            removeAt2(index) {
+                let pervious//前一个节点
+                let current = this.head//当前节点
+                if (index < 0 || index > this.count) return null
+                if (index === 0) {
+                    this.head = this.head.next
+                } else {
+                    pervious = index === 0 ? this.head : this.getNodeAt(index - 1)
+                    current = this.getNodeAt(index)
+                    pervious.next = current.next
+                }
+                this.count--
+                return current.element
+            }
+            equalFn(a, b) {
+                return a === b
+                // return JSON.stringify(a) === JSON.stringify(b)//对象形式
+
+            }
+            dataToindex(element) {
+                let current = this.head//当前节点
+                for (let i = o; i < this.count; i++) {
+                    if (this.equalFn(element, current.element)) {
+                        return i
+                    }
+                    current = current.next
+                }
+            }
+            remove(element) {
+                const index = this.dataToindex(element)
+                return this.removeAt(index)
+            }
+            insert(element, index) {
+                if (index >= 0 && index <= this.count) {
+                    const node = new Node(element)
+                    if (index === 0) {
+                        const current = this.head
+                        node.next = current
+                        this.head = node
+                    } else {
+                        const previous = this.getNodeAt(index - 1)
+                        const current = previous.next
+                        node.next = current
+                        previous.next = node
+                    }
+                    this.count++
+                    return true
+                }
+                return '插入不符合要求'
+            }
+            isEmpty() {
+                return this.size() === 0
+            }
+            size() {
+                return this.count
+            }
+            getHead() {
+                return this.head
+            }
+        }
+        class doubleNode extends Node {
+            constructor(element) {
+                super(element)
+                this.prev = null
+            }
+        }
+        class doubleLinkedList extends LinkedList {
+            constructor() {
+                super()
+                this.tail = null//链表尾
+            }
+            push(element) {
+                const node = new doubleNode(element)
+                if (this.head == null) {
+                    this.head = node
+                    this.tail = node
+                } else {
+                    this.tail.next = node
+                    node.prev = this.tail
+                    this.tail = node
+                }
+                this.count++
+                return true
+            }
+            insert(element, index) {
+                if (index >= 0 && index <= this.count) {
+                    const node = new doubleNode(element)
+                    let current = this.head
+                    if (index === 0) {
+                        if (this.head == null) {
+                            this.head = node
+                            this.tail = node
+                        } else {
+                            node.next = current
+                            current.prev = node
+                            this.head = node
+                        }
+                    } else if (index === this.count) {
+                        current = this.tail
+                        current.next = node
+                        node.prev = current
+                        this.tail = node
+                    } else {
+                        const previous = this.getNodeAt(index - 1)
+                        current = previous.next
+                        node.next = current
+                        current.prev = node
+                        previous.next = node
+                        node.prev = previous
+                    }
+                    this.count++
+                    return true
+                }
+                return '插入不符合要求'
+            }
+
+            removeAt(index) {
+                if (index >= 0 && index < this.count) {
+                    let current = this.head
+                    if (index === 0) {
+                        this.head = current.next
+                        if (this.count === 1) {
+                            this.tail = null
+                        } else {
+                            this.head.prev = null
+                        }
+                    }else if(index === this.count-1){
+                        current = this.tail
+                        this.tail = current.prev
+                        this.tail.next = null
+                    }else{
+                        current = this.getNodeAt(index)
+                        const previous = current.prev
+                        const next = current.next
+                        previous.next = next
+                        next.prev = previous
+                    }
+                    this.count--
+                    return current.element
+                }
+                return '删除不符合要求'
+            }
+            remove(element) {
+                const index = this.dataToindex(element)
+                return this.removeAt(index)
+            }
+            getHead() {
+                return this.head
+            }
+            getTail() {
+                return this.tail
+            }
+        }
+
+        const dlist = new doubleLinkedList()
+    </script>
+</body>
+
+</html>

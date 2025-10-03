@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 适配器对于不同的类有其对应的不同方法,但是由于调用方法时都是同一个接口,所以需要使用适配器进行转换
+        //将Baidu的display方法适配到Tencent的show方法
+        class Tencent{
+            show(){
+                console.log('腾讯');
+            }
+        }
+        class Baidu{
+            display(){
+                console.log('百度');
+            }
+        }
+        function renderMap(a){
+            a.display()
+        }
+        class TencentAdapater extends Tencent{
+            constructor(){
+                super()
+            }
+            display(){
+                this.show()
+            }
+        }
+        renderMap(new TencentAdapater())
+    </script>
+</body>
+</html>

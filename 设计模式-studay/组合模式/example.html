@@ -1,0 +1,93 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <ul>
+        <li>用户管理
+            <ul>
+                <li>添加用户</li>
+                <li>编辑用户</li>
+            </ul>
+        </li>
+    </ul> -->
+    <div id="root">
+        root
+    </div>
+    <script>
+   class Root{
+       constructor(name){
+           this.name=name;
+           this.list=[]
+    }
+    add(permission){
+        this.list.push(permission)
+    }
+    scan(){
+        console.log(`${this.name} 开始扫描`)
+        if(this.name==='root'){
+            console.log('不创建节点');
+        }else{
+            var oul = document.createElement('ul');
+            var oli = document.createElement('li');
+            var ochildul = document.createElement('ul');
+            oli.innerHTML = this.name;
+            oul.appendChild(oli);
+            oli.appendChild(ochildul);
+            document.getElementById('root').appendChild(oul);
+        }
+        this.list.forEach(item=>{
+            item.scan(ochildul)
+        });
+    }
+   }
+   class Page{
+       constructor(name){
+           this.name=name;
+           this.list=[]
+       }
+       add(pages){
+           this.list.push(pages)
+       }
+       scan(ochildul){
+        console.log(`${this.name} 开始扫描`);
+        var oli = document.createElement('li');
+        oli.innerHTML = this.name;
+        ochildul.appendChild(oli);
+        this.list.forEach(item=>{
+            item.scan()
+        })
+    }
+   }
+   const root=new Root('root')
+   const userroot=new Root('userroot')
+   const permissionroot=new Root('permissionroot')
+   const contentroot=new Root('contentroot')
+   
+   const userpage1 = new Page('userpage1')
+   const userpage2 = new Page('userpage2')
+   const permissionpage1 = new Page('permissionpage1')
+   const permissionpage2 = new Page('permissionpage2')
+   const contentpage1 = new Page('contentpage1')
+   const contentpage2 = new Page('contentpage2')
+
+   userroot.add(userpage1)
+   userroot.add(userpage2)
+   
+   permissionroot.add(permissionpage1)
+   permissionroot.add(permissionpage2)
+   
+   contentroot.add(contentpage1)
+   contentroot.add(contentpage2)
+
+   root.add(userroot)
+   root.add(permissionroot)
+   root.add(contentroot)
+
+   root.scan()
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const Folder = function (folder){
+            this.folder=folder
+            this.list = []
+        }
+        Folder.prototype.add = function (res){
+            this.list.push(res)
+        }
+        Folder.prototype.scan = function (){
+            console.log('扫描文件夹',this.folder);
+            for(let i=0;i<this.list.length;i++){
+                this.list[i].scan()
+            }
+        }
+        const File = function (file){
+            this.file = file
+        }
+        File.prototype.scan = function (){
+            console.log('扫描文件',this.file);
+        }
+        let rootFolder = new Folder('root')//根文件夹
+        let htmlFolder = new Folder('html')//子文件夹
+        let cssFolder = new Folder('css')
+        let jsFolder = new Folder('js')
+
+        let htmlFile1 = new File('html1.html')
+        let htmlFile2 = new File('html2.html')
+        let cssFile1 = new File('css1.css')
+        let cssFile2 = new File('css2.css')
+        let jsFile1 = new File('js1.js')
+        let jsFile2 = new File('js2.js')
+
+        rootFolder.add(htmlFolder)
+        rootFolder.add(cssFolder)
+        rootFolder.add(jsFolder)
+
+        htmlFolder.add(htmlFile1)
+        htmlFolder.add(htmlFile2)
+        cssFolder.add(cssFile1)
+        cssFolder.add(cssFile2)
+        jsFolder.add(jsFile1)
+        jsFolder.add(jsFile2)
+
+        rootFolder.scan()
+    </script>
+</body>
+</html>

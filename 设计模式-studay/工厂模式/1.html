@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //创造一个实例化对象的函数工厂,由传入的参数决定实例化哪个对象而不是直接初始化定义所有对象
+        class user{
+            constructor(role,pages){
+                this.role=role;
+                this.pages=pages;
+            }
+            static create(role){
+                switch(role){
+                    case 'admin':
+                        return new user('admin',['home','admin']);
+                    case 'user':
+                        return new user('user',['home','user']);
+                    default:
+                        return new user('guest',['home']);
+                }
+            }
+        }
+        let r1 = user.create('admin');
+        // console.log(r1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function bucketSort(arr,size=3){
+            if(arr.length<2) return arr;
+           const bucket = createBucket(arr,size);
+            return sortBucket(bucket)
+        }
+        function createBucket(arr,size){
+            let minvalue = Math.min(...arr);
+            let maxvalue = Math.max(...arr);
+            const bucketcount = Math.floor((maxvalue-minvalue)/size+1)
+            const buckets = []
+             for(let i = 0;i<bucketcount;i++){
+                buckets[i] = []
+             }
+             for(let i =0;i<arr.length;i++){
+                const index = Math.floor((arr[i]-minvalue)/size)
+                buckets[index].push(arr[i])
+             }
+             return buckets
+        }
+        function sortBucket(arr){
+            const result = []
+            for(let i = 0;i<arr.length;i++){
+                if(arr[i]){
+                    insertSort(arr[i])
+                    result.push(...arr[i])
+                }
+            }
+            return result
+        }
+        function insertSort(arr){
+            const length = arr.length;
+            let temp//存当前这一轮对应索引的元素值
+            for(let i  = 1;i<length;i++){
+                temp = arr[i];
+                let j = i//需要对比的次数
+                while(j>0){
+                    if(arr[j-1]>temp){
+                        arr[j] = arr[j-1]
+                        j--
+                    }
+                   arr[j] = temp
+               
+                }
+            }
+        }
+        bucketSort([1,2,3,4,5,6,7,8,9,10])
+    </script>
+</body>
+</html>

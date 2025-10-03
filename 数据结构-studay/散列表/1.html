@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class HashTable {
+            
+        
+            constructor() {
+                this.table = {}
+            }
+            toStrkey(key) {
+                if (key === null) {
+                    return "null"
+                } else if (key === undefined) {
+                    return "undefined"
+                } else if (typeof key === 'string' || key instanceof String) {
+                    return key
+                }
+                return JSON.stringify(key)
+            }
+            hashCode(key){
+                if(typeof key === 'number'){
+                    return key
+                }
+                const tablekey = this.toStrkey(key)
+                let hash = 0
+                for (let i = 0; i < tablekey.length; i++) {
+                    hash += tablekey.charCodeAt(i)
+                }
+                return hash % 37
+            }
+            set(key,value){
+                if(key!==null&&value!==null){
+                    const position = this.hashCode(key)
+                    this.table[position] = new valuepair(key,value)
+                    return true
+                }
+                return false
+            }
+            get(key){
+                const valuepair = this.table[this.hashCode(key)]
+                return valuepair===undefined?undefined:valuepair.value
+            }
+            remove(key){
+                const hash = this.hashCode(key)
+                const valuepair = this.table[hash]
+                if(valuepair !=null){
+                    delete this.table[hash]
+                    return true
+                }
+                return false
+            }
+        }
+        class valuepair {
+            constructor(key, value) {
+                this.key = key
+                this.value = value
+            }
+
+        }
+        var mymap = new HashTable()
+    </script>
+</body>
+
+</html>

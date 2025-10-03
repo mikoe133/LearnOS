@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .result{
+            width: 200px;
+            height: 200px;
+            border: solid 1px burlywood;
+        }
+    </style>
+</head>
+<body>
+    <button>jsonp</button>
+    <div class="result"></div>
+    <script>
+        $('button').eq(0).click (function (){
+            console.log('dianj');
+            $.getJSON('http://127.0.0.1:8000/jqueryjsonp?callback=?',function (data){
+                console.log(data);
+                $('.result').html(`
+                    名称:${data.exist}<br>
+                    信息:${data.msg}
+                `)
+            })
+        })
+    </script>
+</body>
+</html>

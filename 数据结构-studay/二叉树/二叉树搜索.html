@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(key) {
+                this.key = key;
+                this.left = null;
+                this.right = null;
+            }
+        }
+        class BST {
+            constructor() {
+                this.root = null;
+            }
+            insert(key) {
+                if (this.root === null) {
+                    this.root = new Node(key);
+                } else {
+                    this.insertNode(this.root, key)
+                }
+            }
+            insertNode(node, key) {
+                if (key < node.key) {
+                    if (node.left === null) {
+                        node.left = new Node(key);
+                    } else { this.insertNode(node.left, key) }
+
+                } else {
+                    if (node.right === null) {
+                        node.right = new Node(key);
+                    } else { this.insertNode(node.right, key) }
+
+                }
+            }
+            inOrderMap(callback) {
+                this.inOrderMapNode(this.root, callback);
+            }
+            inOrderMapNode(node, callback) {
+                if (node !== null) {
+                    this.inOrderMapNode(node.left, callback);
+                    callback(node.key);
+                    this.inOrderMapNode(node.right, callback
+                    )
+                }
+            }
+            preOrderMap(callback) {
+                this.inOrderMapNode(this.root, callback);
+            }
+            preOrderMapNode(node, callback) {
+                if (node !== null) {
+                    callback(node.key);
+                    this.preOrderMapNode(node.left, callback);
+
+                    this.preOrderMapNode(node.right, callback)
+                }
+            }
+            postOrderMap(callback) {
+                this.inOrderMapNode(this.root, callback);
+            }
+            postOrderMapNode(node, callback) {
+                if (node !== null) {
+                    this.postOrderMapNode(node.left, callback);
+                    this.postOrderMapNode(node.right, callback)
+                    callback(node.key);
+                }
+            }
+            min(node) {
+                return this.minNode(node);
+            }
+            minNode(node) {
+                let current = node;
+                while (current.left !== null) {
+                    current = current.left;
+                }
+                return current.key;
+            }
+            max(node) {
+                return this.maxNode(node);
+            }
+            maxNode(node) {
+                let current = node;
+                while (current.right !== null) {
+                    current = current.right;
+                }
+                return current.key;
+            }
+            search(key) {
+                return this.searchNode(this.root, key);
+            }
+            searchNode(node, key) {
+                if(node === null){
+                    return false;
+                }                         
+                if(key < node.key){
+                    return this.searchNode(node.left,key);
+                }else if(key > node.key){
+                    return this.searchNode(node.right,key);
+                }else{
+                    return true;
+                }
+            }
+        }
+        var mytree = new BST();
+        mytree.insert(100);
+        mytree.insert(80);
+        mytree.insert(70);
+        mytree.insert(90);
+        mytree.insert(110);
+        mytree.inOrderMap(function (key) {
+            console.log(key);
+        })
+    </script>
+</body>
+
+</html>

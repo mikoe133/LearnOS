@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 发布订阅模式存在一个订阅中心,在这个订阅中可以实现对于订阅内容的筛选和分类
+        // 发布订阅模式可以实现一对多的关系,当一个事件发生时,可以通知多个订阅者
+        // 发布订阅模式可以实现异步编程,当一个事件发生时,可以通知多个订阅者,并且这些订阅者可以异步执行
+        // 发布订阅模式可以实现解耦,当一个事件发生时,可以通知多个订阅者,并且这些订阅者可以独立开发和测试
+        // 发布订阅模式可以实现广播,当一个事件发生时,可以通知多个订阅者,并且这些订阅者可以同时收到通知
+
+        const Pubsub ={//订阅中心
+            message:{
+                // "A":[],A事件中存在多个订阅者
+                // "B":[],
+                // "C":[]
+            },
+            publish(type,data){
+                if(!this.message[type]){
+                    return 
+                }
+                this.message[type].forEach(item => {
+                    item(data)
+                });
+            },
+            subscribe(type,cb){
+                if(!this.message[type]){
+                    this.message[type ]= [cb]
+                }else{
+                    this.message[type].push(cb)
+                }
+            },
+            unsubscribe(type,cb){
+                if(!this.message[type]){
+                    return 
+                }
+                if(!cb){
+                    this.message[type]&&(this.message[type].length = 0)
+                }else{
+                    this.message[type] = this.message[type].filter(item => item !== cb)
+                }
+            }
+        }
+        function testa(data){//订阅者a
+            console.log(data);
+        }
+        function testb(data){//订阅者b
+            console.log(data);   
+        }
+        function testc(data){
+            console.log(data);
+        }
+        Pubsub.subscribe('A',testa)
+        Pubsub.subscribe('B',testb)
+        Pubsub.subscribe('C',testc)
+        Pubsub.subscribe('D',testc)
+        Pubsub.subscribe('B',testb)
+        
+    </script>
+</body>
+</html>

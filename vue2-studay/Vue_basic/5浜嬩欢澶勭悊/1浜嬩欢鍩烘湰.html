@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue (1).js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{name}}</h1>
+        <h1>{{age}}</h1>
+        <!-- <button v-on:click="showinfo"> 点我</button> -->
+        <button @click="showinfo(666,$event)"> 点我</button>
+        <a href="http://baidu.com" @click.prevent="showinfo">链接</a>
+        <input type="text">
+        <input type="text" placeholder="按下回车" @keydown="showinfo">
+        <div class="demo1" @click="showmsg">
+            <button @click.stop="showmsg">冒泡</button>
+            <!-- 阻止冒泡在子元素上写 -->
+        </div>
+        <div class="demo2" @click.capture="showmsg2(2)">
+            <!-- 使用事件捕获在父元素 -->事件捕获2
+            <div @click="showmsg2(1)">事件捕获</div>
+        </div>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data: {
+                name: '薛屹阳',
+                age: 21
+            },
+            methods: {
+                showmsg(a) {
+                    console.log(a.target);
+                },
+                showmsg2(a) {
+                    console.log(a);
+                },
+                showinfo(e) {
+                    console.log(e.key, e.keyCode);//可以查看按键的名称和编码
+                    console.log(e.target.value);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

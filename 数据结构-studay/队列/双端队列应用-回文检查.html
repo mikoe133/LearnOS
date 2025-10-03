@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 回文检查
+        class doubleended {
+            #item = {};
+            #firstindex = 0;
+            #count = 0
+            enterfront(data){
+                if(this.#count == 0){
+                    this.#item[this.#firstindex] = data
+                    this.#count += 1
+                }else{
+                    if(this.#firstindex > 0){
+                        this.#item[this.#firstindex-1] = data
+                        this.#firstindex -= 1
+                    }else{
+                        for(let i = this.#count;i>0;i--){
+                            this.#item[i]= this.#item[i-1]
+                        }
+                        this.#item[0] = data
+                        this.#count += 1
+                    }
+                }
+                return `${data}ti添加成功`
+            }
+            enterback(data) {
+                this.#item[this.#count] = data
+                this.#count += 1
+                return `${data}添加成功`
+            }
+            removefront() {
+                if (this.#firstindex == this.#count) {
+                    return "队列为空"
+                }
+                let res = this.#item[this.#firstindex]
+                delete this.#item[this.#firstindex]
+                this.#firstindex += 1
+                this.#count -= 1
+                return res
+            }
+            removeback() {
+                if(this.#firstindex == this.#count){
+                    return "队列为空"
+                }
+                let res = this.#item[this.#count - 1]
+                delete this.#item[this.#count - 1]
+                this.#count -= 1
+                return res
+            }
+            peekfront() {
+                return this.#item[this.#firstindex]
+            }
+            peekback() {
+                if(this.#firstindex == this.#count){
+                    return "队列为空"
+                }
+                return this.#item[this.#count - 1]
+            }
+            isEmpty() {
+                this.size() == 0 ? true : false
+            }
+            size() {
+                return this.#count - this.#firstindex
+            }
+            clear() {
+                this.#item = {}
+                this.#firstindex = 0
+                this.#count = 0
+            }
+            tostring() {
+                let str = ""
+                for (let i = this.#firstindex; i < this.#count; i++) {
+                    str += this.#item[i] + " "
+                }
+                return str
+            } 
+        }
+        function test(str){
+            let lowstr = str.toLowerCase().split(" ").join("");
+            console.log(lowstr);
+            let dd = new doubleended()
+            for(item of lowstr){
+                dd.enterfront(item)
+            }
+            let isequal = true
+            while(dd.size()>1){
+                if(dd.removeback()!==dd.removefront()){
+                    isequal = false
+                    break
+                }
+            }
+            return isequal
+        }
+        test('a  bc   d        e  ')
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/promise.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+    const p1 = Promise.resolve(2)
+    const p3 = Promise.resolve(Promise.resolve(3))
+    const p4 = Promise.resolve(Promise.reject(4))
+    // const pall = Promise.all([p1,p3])
+    // pall.then(
+    //     value=>{
+    //         console.log(value);
+    //     },
+    //     reason=>{
+    //         console.log(reason);
+    //     }
+    // )
+    // const prace = Promise.race([p4,p3,p1])
+    // prace.then(
+    //     value=>{
+    //         console.log(value);
+    //     },
+    //     reason=>{
+    //         console.log(reason);
+    //     }
+    // )
+
+
+
+    // const  p6 = Promise.resolveDelay(66,2000)
+    const  p7 = Promise.rejectDelay(77,300)
+    // p6.then(
+    //     value=>{
+    //         console.log('p6',value);
+    //     }
+    // )
+    p7.catch(
+        reason=>{
+            console.log('p7',reason)
+        }
+    )
+</script>
+
+</html>
