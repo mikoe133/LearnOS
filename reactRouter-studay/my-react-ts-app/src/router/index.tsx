@@ -33,7 +33,7 @@ export default function Index() {
 
   return (
     <Routes>
-      <Route element={<Film />} />
+      <Route element={<Film  />} />
       {/* 嵌套路由 */}
       <Route path='/film' element={<Film />} > {/* 函数路由 */}
         {/* 默认子路由 */}
@@ -67,7 +67,7 @@ export default function Index() {
     </Routes>
   );
 }
-const AuthCpt = ({ children }: { children:any }) => {
+const AuthCpt = ({ children }: { children: any }) => {
   const token = localStorage.getItem('token')
   if (!token) {
     return <Navigate to='/login' replace />

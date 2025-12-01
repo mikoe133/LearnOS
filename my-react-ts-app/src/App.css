@@ -1,0 +1,9 @@
+#root,
+.ant-layout {
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
+}
+::-webkit-scrollbar{width: 5px;height: 5px;}
+::-webkit-scrollbar-thumb{background-color: #F5F5F5;}
+::-webkit-scrollbar{background-color: #ddd;}
