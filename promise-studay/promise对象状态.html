@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const fs = require('fs')
+
+        const promiseres = new Promise((resolve, reject) => {
+            fs.readFile('../recource/1.txt', 'utf8', (err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+            })
+        })
+        promiseres.then((value) => {
+            console.log('读取成功', value);
+        }, (reason) => {
+            console.log('读取失败', reason);
+        })
+        // const p1 = new Promise((resolve, reject) => {
+        //     resolve('成功了')
+        //     // reject('失败了')
+
+        // })
+        // const then1 = p1.then((value) => {
+        //     console.log('成功回调', value);
+        //     return new Promise((resolve, reject) => {
+        //         reject('shibai')
+        //     })
+
+        // }, (reason) => {
+        //     console.log('   失败回调', reason);
+
+        // })
+        // console.log('then1', then1);
+
+
+
+        const p2 = new Promise((resolve, reject) => {
+            resolve('成功了')
+            // reject('失败了')
+
+        })
+        console.log('p2', p2);
+
+        const then2 = p2.then((value) => {
+            console.log('成功回调11111', value);
+            return value
+            // return new Promise((resolve, reject) => {
+            //     resolve('chenggong')
+            // })
+
+        }, (reason) => {
+            console.log('   失败回调1111111', reason);
+            return new Promise((resolve, reject) => {
+                throw new Error('shibai')
+            })
+        })
+        console.log('then2', then2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

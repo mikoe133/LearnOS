@@ -28,7 +28,6 @@ export default function RightList() {
     {
       title: 'ID',
       dataIndex: 'id',
-
     },
     {
       title: '权限名称',
