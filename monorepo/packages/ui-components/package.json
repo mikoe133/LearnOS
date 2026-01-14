@@ -1,0 +1,12 @@
+{
+  "name": "@monorepo/ui-components",
+  "private": true,
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "types": "src/index.js",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  }
+}
